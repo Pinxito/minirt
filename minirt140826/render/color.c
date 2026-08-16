@@ -6,11 +6,12 @@
 /*   By: gguillen <gguillen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:02:48 by gguillen          #+#    #+#             */
-/*   Updated: 2026/06/14 12:47:39 by gguillen         ###   ########.fr       */
+/*   Updated: 2026/08/16 09:37:40 by gguillen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "parsing.h"
 
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -58,5 +59,6 @@ int	close_window(t_scene *scene)
 		mlx_destroy_image(scene->mlx.mlx, scene->mlx.img);
 	if (scene->mlx.win)
 		mlx_destroy_window(scene->mlx.mlx, scene->mlx.win);
+			free_scene_full(scene);
 	exit(0);
 }

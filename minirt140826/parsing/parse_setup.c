@@ -6,7 +6,7 @@
 /*   By: gguillen <gguillen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 12:52:13 by gguillen          #+#    #+#             */
-/*   Updated: 2026/06/14 12:52:14 by gguillen         ###   ########.fr       */
+/*   Updated: 2026/08/16 09:37:25 by gguillen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	key_hook(int keycode, void *param)
 	t_scene	*scene;
 
 	scene = (t_scene *)param;
-	if (keycode == 65307)
+	if(keycode == 65307 || keycode == 53)
 		close_window(scene);
 	return (0);
 }
