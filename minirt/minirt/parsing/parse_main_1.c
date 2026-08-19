@@ -22,6 +22,8 @@ static void	init_parse_state(t_scene *scene, t_parse_flags *flags)
 	scene->mlx.win = NULL;
 	scene->mlx.img = NULL;
 	scene->mlx.addr = NULL;
+	scene->active_fields = NULL;
+	scene->active_line = NULL;
 }
 
 static void	process_line(t_scene *scene, t_parse_flags *flags, char *line)
@@ -64,6 +66,7 @@ int	parse_scene(t_scene *scene, char *file)
 {
 	t_parse_flags	flags;
 	int				fd;
+	struct stat		file_info;
 
 	init_parse_state(scene, &flags);
 	if (!check_extension(file))
@@ -74,6 +77,11 @@ int	parse_scene(t_scene *scene, char *file)
 		write(2, "Error\n", 6);
 		perror(file);
 		exit(1);
+	}
+	if (fstat(fd, &file_info) < 0 || !S_ISREG(file_info.st_mode))
+	{
+		close(fd);
+		parse_error(scene, "Scene path must be a regular file");
 	}
 	read_scene_file(scene, &flags, fd);
 	close(fd);

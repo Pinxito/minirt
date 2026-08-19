@@ -82,14 +82,14 @@ $(NAME): $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
 
 $(MLX):
-	$(MAKE) -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR) CC="$(CC) -std=gnu89"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) -C $(MLX_DIR) clean
+	-$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
